@@ -1,400 +1,383 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vusi Jantjies | Portfolio</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <!-- AOS Animation CSS -->
+  <!-- AOS (Animate on Scroll) -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Animate.css (optional small effects) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <style>
-    /* Smooth hover for nav links */
-    .nav-link {
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-    .nav-link:hover {
-      color: #ffcc00 !important;
-      transform: translateY(-2px);
+    :root{
+      --accent-1: #12c9b1;
+      --accent-2: #ffcc00;
+      --accent-3: #ff0066;
+      --card-shadow: 0 10px 25px rgba(0,0,0,0.12);
     }
 
-    /* Card hover effect */
-    .card {
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
+    /* Basic transitions */
+    .nav-link { transition: color .25s ease, transform .25s ease; }
+    .nav-link:hover { color: var(--accent-2) !important; transform: translateY(-2px); }
 
-    /* Button hover */
-    .btn-outline-primary:hover, .btn-light:hover {
-      transform: scale(1.05);
-      transition: transform 0.3s ease;
-    }
+    .card{ transition: transform .35s ease, box-shadow .35s ease; }
+    .card:hover{ transform: translateY(-8px); box-shadow: var(--card-shadow); }
 
-    /* Hero gradient animation */
-    .hero-gradient {
-      background: linear-gradient(270deg, #12c9b1, #ca4848, #ff0066);
+    .btn-outline-primary:hover, .btn-light:hover{ transform: scale(1.03); }
+
+    /* Hero gradient */
+    .hero-gradient{
+      background: linear-gradient(270deg, var(--accent-1), #ca4848, var(--accent-3));
       background-size: 600% 600%;
-      animation: gradientBG 12s ease infinite;
+      animation: gradientBG 12s linear infinite;
     }
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    @keyframes gradientBG{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
 
     /* Clock styling */
-    .nav-clock {
-      font-weight: bold;
-      font-size: 0.9rem;
-      margin-left: 1rem;
-      /* color: #25c7bf; */
-       background: linear-gradient(270deg, #12c9b1, #ca4848, #ff0066);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .nav-clock{ font-weight:600; font-size:.9rem; margin-left:1rem; background: linear-gradient(270deg, var(--accent-1), #ca4848, var(--accent-3), #dacd18, #70ff1e); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
 
-    }
-
-    /* Back to top button */
-    #backToTop {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #0a58ca;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      padding: 12px;
-      cursor: pointer;
-      font-size: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      display: none;
-      transition: transform 0.3s ease;
-      z-index: 999;
-    }
-    #backToTop:hover {
-      transform: scale(1.15);
-    }
+    /* Back to top */
+    #backToTop{ position:fixed; right:20px; bottom:24px; z-index:999; border-radius:50%; width:44px; height:44px; display:none; align-items:center; justify-content:center; }
 
     /* Dark mode */
-    body.dark-mode {
-      background-color: #121212;
-      color: white;
-    }
-    body.dark-mode .bg-light {
-      background-color: #1f1f1f !important;
-    }
-    body.dark-mode .card {
-      background-color: #1f1f1f;
-      color: white;
-    }
+    body.dark-mode{ background:#0f0f10; color:#e6e6e6; }
+    body.dark-mode .bg-light{ background:#161616 !important; }
+    body.dark-mode .card{ background:#161616; color:#e6e6e6; }
 
-    /* Scroll progress bar */
-    #scrollProgress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 4px;
-      background-color: #ffcc00;
-      z-index: 1000;
-      transition: width 0.25s ease;
-    }
+    /* Scroll progress */
+    #scrollProgress{ position:fixed; left:0; top:0; height:4px; width:0%; background:var(--accent-2); z-index:1200; transition:width .18s linear; }
+
+    /* Fade-in for sections observed */
+    .fade-section{ opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease; }
+    .fade-in{ opacity:1 !important; transform:translateY(0) !important; }
+
+    /* Skills */
+    .skill-bar{ background:#e9ecef; border-radius:8px; height:12px; overflow:hidden; }
+    .skill-fill{ height:100%; width:0; border-radius:8px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3)); transition:width 1.2s cubic-bezier(.4,0,.2,1); }
+
+    /* Responsive image */
+    .profile-img{ max-width:100%; height:auto; border-radius:.75rem; }
+
+    footer .socials a{ color:inherit; margin-right:.75rem; }
+
+    /* Utility spacing tweak for container sections */
+    section{ padding-top:3.5rem; padding-bottom:3.5rem; }
   </style>
 </head>
 <body>
 
-<!-- Scroll Progress Bar -->
-<div id="scrollProgress"></div>
+  <!-- Progress bar -->
+  <div id="scrollProgress" aria-hidden="true"></div>
 
-<!-- 🌐 Responsive Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
-  <div class="container">
-    <a class="navbar-brand fw-bold fs-4" href="#"><i class="bi bi-code-slash me-2"></i>Vusi Jantjies</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-      aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-4" href="#"><i class="bi bi-code-slash me-2"></i>Vusi Jantjies</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-center">
-        <li class="nav-item"><a class="nav-link active" href="#about"><i class="bi bi-person-circle me-1"></i>About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#projects"><i class="bi bi-laptop me-1"></i>Projects</a></li>
-         <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact"><i class="bi bi-envelope-fill me-1"></i>Contact</a></li>
-        <span class="nav-clock" id="clock"></span>
-        <button id="themeToggle" class="btn btn-sm btn-outline-light ms-3"><i class="bi bi-moon-stars"></i></button>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- 🎯 Hero Section -->
-<section class="hero-gradient text-white text-center py-5">
-  <div class="container">
-    <h1 class="display-4 fw-bold mb-3" data-aos="fade-down">
-      <i class="bi bi-hand-thumbs-up me-2"></i>Hi, I'm Vusi
-      <i class="bi bi-person-raised-hand"></i>
-    </h1>
-    <p class="lead" data-aos="fade-up" data-aos-delay="200">
-      Full-stack Web Developer | Angular & Bootstrap Enthusiast
-    </p>
-    <a href="#projects" class="btn btn-light btn-lg mt-4 shadow" data-aos="zoom-in">
-      <i class="bi bi-rocket-takeoff me-1"></i>View My Work
-    </a>
-  </div>
-</section>
-
-<!-- 👤 About Me -->
-<section id="about" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center mb-5 fw-bold" data-aos="fade-up"><i class="bi bi-person-lines-fill me-2"></i>About Me</h2>
-    <div class="row align-items-center">
-      <div class="col-md-6" data-aos="fade-right">
-        <img src="/assets/IMG-20240619-WA0037.jpg" alt="Vusi Jantjies" class="img-fluid rounded-4 shadow-sm" />
-      </div>
-      <div class="col-md-6 mt-4 mt-md-0" data-aos="fade-left">
-        <p class="lead">
-          I'm a self-taught developer from South Africa passionate about crafting beautiful, functional web applications.
-        </p>
-        <p><i class="bi bi-tools me-2"></i>Skilled in Angular, Bootstrap, JavaScript, Node.js & PostgreSQL.</p>
-        <p><i class="bi bi-lightbulb me-2"></i>I bring ideas to life through clean code & responsive designs.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 💼 Projects -->
-<section id="projects" class="py-5">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-5" data-aos="fade-up"><i class="bi bi-folder2-open me-2"></i>My Projects</h2>
-    <div class="row g-4">
-      <div class="col-md-4" data-aos="flip-left">
-        <div class="card h-100 shadow-sm border-0">
-            <img src="/assets/KMRD-Claims-Management-810x477.jpg" class="card-img-top" alt="Project 1" />
-
-          <div class="card-body">
-            <h5 class="card-title fw-bold"><i class="bi bi-list-check me-2"></i>Claim-Management</h5>
-            <p class="card-text">Manage tasks with a sleek Angular UI.</p>
-                  <a href="https://github.com/Mavest98/Claim-Management" target="_blank" class="btn btn-outline-primary">
-        <i class="bi bi-github me-1"></i>View on GitHub
-      </a>
-            <!-- <a href="#" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a> -->
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4" data-aos="flip-up">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="/assets/online-store-small-business-blog.png" class="card-img-top" alt="Project 2" />
-          <div class="card-body">
-            <h5 class="card-title fw-bold"><i class="bi bi-cart4 me-2"></i>Online Store</h5>
-            <p class="card-text">Online store with cart and secure checkout.</p>
-                     <a href="https://github.com/Mavest98/food.git" target="_blank" class="btn btn-outline-primary">
-        <i class="bi bi-github me-1"></i>View on GitHub
-      </a>
-            <!-- <a href="#" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a> -->
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4" data-aos="flip-right">
-        <div class="card h-100 shadow-sm border-0">
-          <img src="/assets/Professional-portfolio-736x414.webp" class="card-img-top" alt="Project 1" />
-          <div class="card-body">
-            <h5 class="card-title fw-bold"><i class="bi bi-window-sidebar me-2"></i>Portfolio Website</h5>
-            <p class="card-text">This site, built with Angular & Bootstrap.</p>
-                 <a href="https://github.com/Mavest98/Flex-portfolio.git" target="_blank" class="btn btn-outline-primary">
-        <i class="bi bi-github me-1"></i>View on GitHub
-      </a>
-
-            <!-- <a href="#" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a> -->
-          </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center ms-3">
+          <span id="clock" class="nav-clock" aria-live="polite"></span>
+          <button id="themeToggle" class="btn btn-sm btn-outline-light ms-3" aria-label="Toggle theme"><i class="bi bi-moon-stars"></i></button>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- 🎓 Certificates -->
-<section id="certificates" class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-5" data-aos="fade-up">
-      <i class="bi bi-award-fill me-2"></i>My Certificates
-    </h2>
-    <div class="row g-4 justify-content-center">
+  <!-- HERO -->
+  <header class="hero-gradient text-white text-center py-5">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-3" data-aos="fade-down"><i class="bi bi-hand-thumbs-up me-2"></i>Hi, I'm Vusi</h1>
+      <p class="lead" data-aos="fade-up" data-aos-delay="150">Full-stack Web Developer | Angular & Bootstrap Enthusiast</p>
+      <a href="#projects" class="btn btn-light btn-lg mt-4 shadow" data-aos="zoom-in" rel="noopener noreferrer"><i class="bi bi-rocket-takeoff me-1"></i>View My Work</a>
+    </div>
+  </header>
 
-      <!-- Certificate Item -->
-      <div class="col-md-4" data-aos="zoom-in">
-        <div class="card h-100 shadow-sm border-0 text-center">
-          <div class="card-body">
-            <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
-            <h5 class="card-title fw-bold">Certificate In Full Stack Development</h5>
-            <p class="card-text">FNB App Academy 2025</p>
-            <a href="/assets/Vusi-2-68822ED8A1119-2025-07-24-15-02-16.pdf"
-               target="_blank"
-               class="btn btn-outline-primary">
-              <i class="bi bi-eye me-1"></i>View Certificate
-            </a>
-          </div>
+  <!-- ABOUT -->
+  <section id="about" class="bg-light">
+    <div class="container">
+      <h2 class="text-center mb-5 fw-bold" data-aos="fade-up"><i class="bi bi-person-lines-fill me-2"></i>About Me</h2>
+      <div class="row align-items-center">
+        <div class="col-md-6" data-aos="fade-right">
+          <img src="/assets/IMG-20240619-WA0037.jpg" alt="Portrait of Vusi Jantjies" class="profile-img shadow-sm" />
+        </div>
+        <div class="col-md-6 mt-4 mt-md-0" data-aos="fade-left">
+          <p class="lead">I'm a self-taught developer from South Africa passionate about crafting beautiful, functional web applications.</p>
+          <ul class="list-unstyled">
+            <li><i class="bi bi-tools me-2"></i>Skilled in Angular, Bootstrap, JavaScript, Node.js & PostgreSQL.</li>
+            <li><i class="bi bi-lightbulb me-2"></i>I bring ideas to life through clean code & responsive designs.</li>
+          </ul>
         </div>
       </div>
-            <div class="col-md-4" data-aos="zoom-in">
-        <div class="card h-100 shadow-sm border-0 text-center">
-          <div class="card-body">
-            <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
-            <h5 class="card-title fw-bold">Data Visualization with Python</h5>
-            <p class="card-text">Issued by IBM</p>
-            <a href="/assets/Vusi-2-68822ED8A1119-2025-07-24-15-02-16.pdf"
-               target="_blank"
-               class="btn btn-outline-primary">
-              <i class="bi bi-eye me-1"></i>View Certificate
-            </a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5" data-aos="fade-up"><i class="bi bi-folder2-open me-2"></i>My Projects</h2>
+      <div class="row g-4">
+
+        <div class="col-md-4" data-aos="flip-left">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="/assets/KMRD-Claims-Management-810x477.jpg" class="card-img-top" alt="Claim Management project screenshot">
+            <div class="card-body">
+              <h5 class="card-title fw-bold"><i class="bi bi-list-check me-2"></i>Claim-Management</h5>
+              <p class="card-text">Manage tasks with a sleek Angular UI.</p>
+              <a href="https://github.com/Mavest98/Claim-Management" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="flip-up">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="/assets/online-store-small-business-blog.png" class="card-img-top" alt="Online store project screenshot">
+            <div class="card-body">
+              <h5 class="card-title fw-bold"><i class="bi bi-cart4 me-2"></i>Online Store</h5>
+              <p class="card-text">Online store with cart and secure checkout.</p>
+              <a href="https://github.com/Mavest98/food.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="flip-right">
+          <div class="card h-100 shadow-sm border-0">
+            <img src="/assets/Professional-portfolio-736x414.webp" class="card-img-top" alt="Portfolio project screenshot">
+            <div class="card-body">
+              <h5 class="card-title fw-bold"><i class="bi bi-window-sidebar me-2"></i>Portfolio Website</h5>
+              <p class="card-text">This site, built with Angular & Bootstrap.</p>
+              <a href="https://github.com/Mavest98/Flex-portfolio.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates" class="bg-light">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5" data-aos="fade-up"><i class="bi bi-award-fill me-2"></i>My Certificates</h2>
+
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4" data-aos="zoom-in">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
+              <h5 class="card-title fw-bold">Certificate in Full Stack Development</h5>
+              <p class="card-text text-muted">FNB App Academy 2025</p>
+              <a href="/assets/Vusi-2-68822ED8A1119-2025-07-24-15-02-16.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>View Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
+              <h5 class="card-title fw-bold">Data Visualization with Python</h5>
+              <p class="card-text text-muted">Issued by IBM</p>
+              <a href="/assets/Vusi-2-68822ED8A1119-2025-07-24-15-02-16.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>View Certificate</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+          <div class="card h-100 shadow-sm border-0 text-center">
+            <div class="card-body">
+              <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
+              <h5 class="card-title fw-bold">Data Analysis with Python</h5>
+              <p class="card-text text-muted">Issued by IBM</p>
+              <a href="/assets/IBM DA0101EN Certificate _ IBM SkillsBuild.PDF" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-eye me-1"></i>View Certificate</a>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Another Certificate Example -->
-      <div class="col-md-4" data-aos="zoom-in" data-aos-delay="150">
-        <div class="card h-100 shadow-sm border-0 text-center">
-          <div class="card-body">
-            <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
-            <h5 class="card-title fw-bold"> Data Analysis with Python</h5>
-            <p class="card-text">Issued by IBM</p>
-            <a href="/assets/IBM DA0101EN Certificate _ IBM SkillsBuild.PDF"
-               target="_blank"
-               class="btn btn-outline-primary">
-              <i class="bi bi-eye me-1"></i>View Certificate
-            </a>
-          </div>
+      <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
+        <a href="/assets/Vusi Jantjies (1).pdf" class="btn btn-warning btn-lg shadow" download><i class="bi bi-file-earmark-person me-1"></i>Download Resume</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS (icons + progress bars combined) -->
+  <section id="skills">
+    <div class="container" data-aos="fade-up">
+      <h2 class="text-center fw-bold mb-5"><i class="bi bi-lightning-fill me-2"></i>Skills</h2>
+
+      <div class="row mb-4 g-4">
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up">
+          <i class="bi bi-code-slash display-4"></i>
+          <h5 class="mt-3">HTML</h5>
+        </div>
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="80">
+          <i class="bi bi-braces display-4"></i>
+          <h5 class="mt-3">CSS</h5>
+        </div>
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="160">
+          <i class="bi bi-filetype-js display-4"></i>
+          <h5 class="mt-3">JavaScript</h5>
+        </div>
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="240">
+          <i class="bi bi-bootstrap display-4"></i>
+          <h5 class="mt-3">Bootstrap</h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <h6>HTML</h6>
+          <div class="skill-bar mb-3"><div class="skill-fill" data-skill="95%"></div></div>
+
+          <h6>CSS</h6>
+          <div class="skill-bar mb-3"><div class="skill-fill" data-skill="90%"></div></div>
+
+          <h6>JavaScript</h6>
+          <div class="skill-bar mb-3"><div class="skill-fill" data-skill="85%"></div></div>
+        </div>
+
+        <div class="col-md-6">
+          <h6>Bootstrap</h6>
+          <div class="skill-bar mb-3"><div class="skill-fill" data-skill="88%"></div></div>
+
+          <h6>Angular</h6>
+          <div class="skill-bar mb-3"><div class="skill-fill" data-skill="80%"></div></div>
+
+          <h6>Node.js</h6>
+          <div class="skill-bar mb-3"><div class="skill-fill" data-skill="75%"></div></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="skills">
-  <div class="container" data-aos="fade-up">
-    <h2 class="text-center fw-bold mb-5"><i class="bi bi-lightning-fill me-2"></i>Skills</h2>
-    <div class="row g-4">
-      <div class="col-md-3 col-sm-6 text-center">
-        <i class="bi bi-code-slash display-4 text-primary"></i>
-        <h5 class="mt-3">HTML</h5>
+  <!-- CONTACT -->
+  <section id="contact" class="container">
+    <h2 class="fw-bold mb-4">Contact Me</h2>
+    <form action="https://formspree.io/f/meozpbje" method="POST" class="contact-form p-4 rounded-3 shadow-sm bg-light" data-aos="fade-up">
+      <div class="mb-3">
+        <label for="name" class="form-label">Your Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
       </div>
-      <div class="col-md-3 col-sm-6 text-center">
-        <i class="bi bi-braces display-4 text-success"></i>
-        <h5 class="mt-3">CSS</h5>
+      <div class="mb-3">
+        <label for="email" class="form-label">Your Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
       </div>
-      <div class="col-md-3 col-sm-6 text-center">
-        <i class="bi bi-filetype-js display-4 text-warning"></i>
-        <h5 class="mt-3">JavaScript</h5>
+      <div class="mb-3">
+        <label for="message" class="form-label">Your Message</label>
+        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your message here..." required></textarea>
       </div>
-      <div class="col-md-3 col-sm-6 text-center">
-        <i class="bi bi-bootstrap display-4 text-purple"></i>
-        <h5 class="mt-3">Bootstrap</h5>
-      </div>
-    </div>
-  </div>
-</section>
+      <button type="submit" class="btn btn-primary w-100"><i class="bi bi-send-check-fill me-2"></i>Send Message</button>
+    </form>
+  </section>
 
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-1">&copy; 2025 Vusi Jantjies. All rights reserved.</p>
+      <small class="text-muted">Built with Angular + Bootstrap</small>
 
-
-<!-- ✉️ Contact -->
-<section id="contact" class="bg-light py-5">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-4" data-aos="fade-up">
-      <i class="bi bi-envelope-paper-fill me-2"></i>Contact Me
-    </h2>
-    <div class="row justify-content-center">
-      <div class="col-md-8" data-aos="fade-up" data-aos-delay="100">
-        <form action="https://formspree.io/f/meozpbje" method="POST"
-              class="contact-form p-4 rounded-3 shadow-sm">
-          <div class="mb-3">
-            <label for="name" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="name" name="name" required />
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label">Your Email</label>
-            <input type="email" class="form-control" id="email" name="_replyto" required />
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label">Your Message</label>
-            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">
-            <i class="bi bi-send-check-fill me-2"></i>Send Message
-          </button>
-        </form>
+      <div class="socials mt-3">
+        <a href="https://github.com/Mavest98" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github fs-5"></i></a>
+        <a href="https://www.linkedin.com/in/vusi-jantjies-a42166185/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+        <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#sent?compose=new" aria-label="Email"><i class="bi bi-envelope fs-5"></i></a>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
+  <!-- Back to top button -->
+  <button id="backToTop" class="btn btn-primary" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
 
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      // AOS
+      if(window.AOS) AOS.init({ duration: 900, once: true });
 
-<!-- 🦶 Footer -->
-<footer class="bg-dark text-white text-center py-4 mt-5">
-  <div class="container">
-    <p class="mb-1">&copy; 2025 Vusi Jantjies. All rights reserved.</p>
-    <small class="text-muted"><i class="bi bi-code-slash me-1"></i>Built with Angular + Bootstrap</small>
-  </div>
-</footer>
+      // Clock
+      const clockEl = document.getElementById('clock');
+      function updateClock(){
+        const now = new Date();
+        clockEl.textContent = now.toLocaleTimeString();
+      }
+      updateClock();
+      setInterval(updateClock, 1000);
 
-<!-- Back to Top Button -->
-<button id="backToTop" title="Go to top"><i class="bi bi-arrow-up"></i></button>
+      // Theme toggle with persistence
+      const themeToggle = document.getElementById('themeToggle');
+      const prefersDark = localStorage.getItem('dark-mode') === 'true';
+      if(prefersDark) document.body.classList.add('dark-mode');
+      function refreshThemeButton(){
+        themeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '<i class="bi bi-brightness-high"></i>' : '<i class="bi bi-moon-stars"></i>';
+      }
+      refreshThemeButton();
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
+        refreshThemeButton();
+      });
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  // Init AOS animations
-  AOS.init({
-    duration: 1000,
-    once: true
-  });
+      // Back to top & scroll progress
+      const backToTop = document.getElementById('backToTop');
+      function handleScroll(){
+        const top = document.documentElement.scrollTop || document.body.scrollTop;
+        backToTop.style.display = top > 300 ? 'flex' : 'none';
 
-  // Digital clock
-  function updateClock() {
-    const now = new Date();
-    document.getElementById('clock').textContent = now.toLocaleTimeString();
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = scrollHeight > 0 ? (top / scrollHeight) * 100 : 0;
+        document.getElementById('scrollProgress').style.width = scrolled + '%';
+      }
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  // Back to top button
-  const backToTop = document.getElementById("backToTop");
-  window.addEventListener("scroll", () => {
-    if (document.documentElement.scrollTop > 300) {
-      backToTop.style.display = "block";
-    } else {
-      backToTop.style.display = "none";
-    }
+      // IntersectionObserver for fade-in sections
+      const sections = document.querySelectorAll('.fade-section');
+      const observer = new IntersectionObserver((entries) =>{
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('fade-in'); });
+      }, { threshold: 0.18 });
+      sections.forEach(s => observer.observe(s));
 
-    // Scroll progress
-    const scrollTop = document.documentElement.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (scrollTop / scrollHeight) * 100;
-    document.getElementById("scrollProgress").style.width = scrolled + "%";
-  });
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+      // Skills animation when visible
+      const skillsSection = document.getElementById('skills');
+      if(skillsSection){
+        const skillObserver = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              const bars = skillsSection.querySelectorAll('.skill-fill');
+              bars.forEach(bar => bar.style.width = bar.getAttribute('data-skill'));
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.25 });
+        skillObserver.observe(skillsSection);
+      }
 
-  // Theme toggle
-  const themeToggle = document.getElementById("themeToggle");
-  themeToggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-    themeToggle.innerHTML = document.body.classList.contains("dark-mode")
-      ? '<i class="bi bi-brightness-high"></i>'
-      : '<i class="bi bi-moon-stars"></i>';
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
+<!-- End of src/index.html -->
+<!-- This file is the main entry point for the portfolio website, containing HTML structure, styles, and scripts for interactivity. It includes sections for navigation, hero, about, projects, certificates, skills, contact, and footer. The page is designed to be responsive and visually appealing with animations and transitions. -->
+<!-- The code uses Bootstrap for layout and styling, AOS for scroll animations, and custom CSS    for additional effects. It also includes a dark mode toggle, clock display, and back-to-top functionality. The portfolio showcases projects and certificates with links to GitHub and downloadable content. -->
+<!-- The JavaScript handles dynamic features like the clock, theme toggle, scroll progress bar, and fade-in effects for sections. It uses IntersectionObserver for performance-efficient visibility detection. The skills section features animated progress bars that fill when the section comes into view. -->
+<!-- The contact form uses Formspree for handling submissions. The footer includes social media links and   a copyright notice. -->
+<!-- The page is structured to be SEO-friendly with appropriate headings and alt text for images. -->
