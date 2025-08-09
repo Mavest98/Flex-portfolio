@@ -54,7 +54,11 @@
       font-weight: bold;
       font-size: 0.9rem;
       margin-left: 1rem;
-      color: #ffcc00;
+      /* color: #25c7bf; */
+       background: linear-gradient(270deg, #12c9b1, #ca4848, #ff0066);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
     }
 
     /* Back to top button */
@@ -123,6 +127,7 @@
       <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item"><a class="nav-link active" href="#about"><i class="bi bi-person-circle me-1"></i>About</a></li>
         <li class="nav-item"><a class="nav-link" href="#projects"><i class="bi bi-laptop me-1"></i>Projects</a></li>
+         <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
         <li class="nav-item"><a class="nav-link" href="#contact"><i class="bi bi-envelope-fill me-1"></i>Contact</a></li>
         <span class="nav-clock" id="clock"></span>
         <button id="themeToggle" class="btn btn-sm btn-outline-light ms-3"><i class="bi bi-moon-stars"></i></button>
@@ -239,15 +244,29 @@
           </div>
         </div>
       </div>
+            <div class="col-md-4" data-aos="zoom-in">
+        <div class="card h-100 shadow-sm border-0 text-center">
+          <div class="card-body">
+            <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
+            <h5 class="card-title fw-bold">Data Visualization with Python</h5>
+            <p class="card-text">Issued by IBM</p>
+            <a href="/assets/Vusi-2-68822ED8A1119-2025-07-24-15-02-16.pdf"
+               target="_blank"
+               class="btn btn-outline-primary">
+              <i class="bi bi-eye me-1"></i>View Certificate
+            </a>
+          </div>
+        </div>
+      </div>
 
       <!-- Another Certificate Example -->
       <div class="col-md-4" data-aos="zoom-in" data-aos-delay="150">
         <div class="card h-100 shadow-sm border-0 text-center">
           <div class="card-body">
             <i class="bi bi-file-earmark-pdf text-danger display-4 mb-3"></i>
-            <h5 class="card-title fw-bold">JavaScript Mastery</h5>
-            <p class="card-text">Issued by ABC Institute</p>
-            <a href="/assets/certificates/javascript-mastery.pdf"
+            <h5 class="card-title fw-bold"> Data Analysis with Python</h5>
+            <p class="card-text">Issued by IBM</p>
+            <a href="/assets/IBM DA0101EN Certificate _ IBM SkillsBuild.PDF"
                target="_blank"
                class="btn btn-outline-primary">
               <i class="bi bi-eye me-1"></i>View Certificate
@@ -258,6 +277,31 @@
     </div>
   </div>
 </section>
+
+<section id="skills">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center fw-bold mb-5"><i class="bi bi-lightning-fill me-2"></i>Skills</h2>
+    <div class="row g-4">
+      <div class="col-md-3 col-sm-6 text-center">
+        <i class="bi bi-code-slash display-4 text-primary"></i>
+        <h5 class="mt-3">HTML</h5>
+      </div>
+      <div class="col-md-3 col-sm-6 text-center">
+        <i class="bi bi-braces display-4 text-success"></i>
+        <h5 class="mt-3">CSS</h5>
+      </div>
+      <div class="col-md-3 col-sm-6 text-center">
+        <i class="bi bi-filetype-js display-4 text-warning"></i>
+        <h5 class="mt-3">JavaScript</h5>
+      </div>
+      <div class="col-md-3 col-sm-6 text-center">
+        <i class="bi bi-bootstrap display-4 text-purple"></i>
+        <h5 class="mt-3">Bootstrap</h5>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 <!-- ✉️ Contact -->
