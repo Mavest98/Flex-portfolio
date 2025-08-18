@@ -1,77 +1,108 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vusi Jantjies | Portfolio</title>
 
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
   <!-- AOS (Animate on Scroll) -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <!-- Animate.css (optional small effects) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
+  <!-- Optional Plausible Analytics (uncomment & set your domain) -->
+  <!-- <script defer data-domain="YOUR-DOMAIN-HERE" src="https://plausible.io/js/script.js"></script> -->
+
   <style>
     :root{
-      --accent-1: #12c9b1;
-      --accent-2: #ffcc00;
-      --accent-3: #ff0066;
-      --card-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      --accent-1:#12c9b1; --accent-2:#ffcc00; --accent-3:#ff0066; --card-shadow:0 10px 25px rgba(0,0,0,.12);
     }
-
+    html { scroll-behavior:smooth; }
     /* Basic transitions */
-    .nav-link { transition: color .25s ease, transform .25s ease; }
-    .nav-link:hover { color: var(--accent-2) !important; transform: translateY(-2px); }
-
-    .card{ transition: transform .35s ease, box-shadow .35s ease; }
-    .card:hover{ transform: translateY(-8px); box-shadow: var(--card-shadow); }
-
-    .btn-outline-primary:hover, .btn-light:hover{ transform: scale(1.03); }
+    .nav-link{transition:color .25s ease, transform .25s ease}
+    .nav-link:hover{color:var(--accent-2)!important; transform:translateY(-2px)}
+    .card{transition:transform .35s ease, box-shadow .35s ease}
+    .card:hover{transform:translateY(-8px); box-shadow:var(--card-shadow)}
+    .btn-outline-primary:hover,.btn-light:hover{transform:scale(1.03)}
 
     /* Hero gradient */
-    .hero-gradient{
-      background: linear-gradient(270deg, var(--accent-1), #ca4848, var(--accent-3));
-      background-size: 600% 600%;
-      animation: gradientBG 12s linear infinite;
-    }
-    @keyframes gradientBG{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    .hero-gradient{background:linear-gradient(270deg,var(--accent-1),#ca4848,var(--accent-3));background-size:600% 600%;animation:gradientBG 12s linear infinite}
+    @keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
     /* Clock styling */
-    .nav-clock{ font-weight:600; font-size:.9rem; margin-left:1rem; background: linear-gradient(270deg, var(--accent-1), #ca4848, var(--accent-3), #dacd18, #70ff1e); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+    .nav-clock{font-weight:600;font-size:.9rem;margin-left:1rem;background:linear-gradient(270deg,var(--accent-1),#ca4848,var(--accent-3),#dacd18,#70ff1e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 
     /* Back to top */
-    #backToTop{ position:fixed; right:20px; bottom:24px; z-index:999; border-radius:50%; width:44px; height:44px; display:none; align-items:center; justify-content:center; }
+    #backToTop{position:fixed;right:20px;bottom:24px;z-index:999;border-radius:50%;width:44px;height:44px;display:none;align-items:center;justify-content:center}
 
     /* Dark mode */
-    body.dark-mode{ background:#0f0f10; color:#e6e6e6; }
-    body.dark-mode .bg-light{ background:#161616 !important; }
-    body.dark-mode .card{ background:#161616; color:#e6e6e6; }
+    body.dark-mode{background:#0f0f10;color:#e6e6e6}
+    body.dark-mode .bg-light{background:#161616!important}
+    body.dark-mode .card{background:#161616;color:#e6e6e6}
 
     /* Scroll progress */
-    #scrollProgress{ position:fixed; left:0; top:0; height:4px; width:0%; background:var(--accent-2); z-index:1200; transition:width .18s linear; }
+    #scrollProgress{position:fixed;left:0;top:0;height:4px;width:0%;background:var(--accent-2);z-index:1200;transition:width .18s linear}
 
-    /* Fade-in for sections observed */
-    .fade-section{ opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease; }
-    .fade-in{ opacity:1 !important; transform:translateY(0) !important; }
+    /* Fade-in observed */
+    .fade-section{opacity:0;transform:translateY(18px);transition:opacity .8s ease, transform .8s ease}
+    .fade-in{opacity:1!important;transform:translateY(0)!important}
 
     /* Skills */
-    .skill-bar{ background:#e9ecef; border-radius:8px; height:12px; overflow:hidden; }
-    .skill-fill{ height:100%; width:0; border-radius:8px; background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3)); transition:width 1.2s cubic-bezier(.4,0,.2,1); }
+    .skill-bar{background:#e9ecef;border-radius:8px;height:12px;overflow:hidden}
+    .skill-fill{height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));transition:width 1.2s cubic-bezier(.4,0,.2,1)}
 
     /* Responsive image */
-    .profile-img{ max-width:100%; height:auto; border-radius:.75rem; }
+    .profile-img{max-width:100%;height:auto;border-radius:.75rem}
 
-    footer .socials a{ color:inherit; margin-right:.75rem; }
+    footer .socials a{color:inherit;margin-right:.75rem}
+    section{padding-top:3.5rem;padding-bottom:3.5rem}
 
-    /* Utility spacing tweak for container sections */
-    section{ padding-top:3.5rem; padding-bottom:3.5rem; }
+    /* Portfolio filter buttons */
+    .filter-btns .btn{margin:.25rem}
+    .portfolio-item{display:block}
+    .portfolio-item.hide{display:none!important}
+
+    /* Sort control */
+    .sort-control{min-width:220px}
+
+    /* Testimonial avatar */
+    .avatar{width:56px;height:56px;border-radius:50%;object-fit:cover}
+
+    /* Timeline */
+    .timeline{position:relative;margin-left:1rem}
+    .timeline::before{content:"";position:absolute;left:12px;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--accent-1),var(--accent-2))}
+    .timeline-item{position:relative;padding-left:3rem;margin-bottom:1.25rem}
+    .timeline-item::before{content:"";position:absolute;left:5px;top:.35rem;width:18px;height:18px;background:var(--accent-3);border-radius:50%;box-shadow:0 0 0 4px #ffffff}
+    body.dark-mode .timeline-item::before{box-shadow:0 0 0 4px #161616}
+
+    /* Hero typewriter */
+    .typewriter{display:inline-block;border-right:2px solid rgba(255,255,255,.8);white-space:nowrap;overflow:hidden}
+
+    /* Chatbot */
+    .chatbot-toggle{position:fixed;right:20px;bottom:84px;z-index:9999}
+    .chatbot{position:fixed;right:20px;bottom:140px;width:320px;max-height:60vh;display:none;flex-direction:column;background:#fff;border-radius:16px;box-shadow:var(--card-shadow);overflow:hidden;z-index:10000}
+    .chatbot.dark{background:#161616;color:#e6e6e6}
+    .chatbot-header{padding:.75rem 1rem;background:var(--accent-1);color:#fff;display:flex;justify-content:space-between;align-items:center}
+    .chatbot-body{padding:1rem;overflow:auto}
+    .chat-msg{margin-bottom:.5rem}
+    .chat-msg.user{text-align:right}
+    .chatbot-input{display:flex;gap:.5rem;padding:.75rem;border-top:1px solid rgba(0,0,0,.06)}
+    .chatbot-input input{flex:1}
+
+    /* Visitor counter */
+    .visitor-pill{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .6rem;border-radius:999px;background:rgba(255,255,255,.1)}
+    body.dark-mode .visitor-pill{background:rgba(0,0,0,.25)}
+
+    /* Playground iframe */
+    .playground-iframe{width:100%;height:520px;border:0;border-radius:16px;box-shadow:var(--card-shadow)}
   </style>
 </head>
-<body>
 
+<body>
   <!-- Progress bar -->
   <div id="scrollProgress" aria-hidden="true"></div>
 
@@ -82,13 +113,14 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item"><a class="nav-link active" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
           <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#resume">Resume</a></li>
+          <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
         </ul>
         <div class="d-flex align-items-center ms-3">
@@ -102,19 +134,24 @@
   <!-- HERO -->
   <header class="hero-gradient text-white text-center py-5">
     <div class="container">
-      <h1 class="display-4 fw-bold mb-3" data-aos="fade-down"><i class="bi bi-hand-thumbs-up me-2"></i>Hi, I'm Vusi</h1>
-      <p class="lead" data-aos="fade-up" data-aos-delay="150">Full-stack Web Developer | Angular & Bootstrap Enthusiast</p>
-      <a href="#projects" class="btn btn-light btn-lg mt-4 shadow" data-aos="zoom-in" rel="noopener noreferrer"><i class="bi bi-rocket-takeoff me-1"></i>View My Work</a>
+      <h1 class="display-4 fw-bold mb-2" data-aos="fade-down"><i class="bi bi-hand-thumbs-up me-2"></i>Hi, I'm Vusi</h1>
+      <p class="lead mb-1" data-aos="fade-up" data-aos-delay="100">
+        <span id="typewriter" class="typewriter"></span>
+      </p>
+      <div class="mt-3" data-aos="zoom-in" data-aos-delay="200">
+        <a href="#projects" class="btn btn-light btn-lg shadow me-2" rel="noopener noreferrer"><i class="bi bi-rocket-takeoff me-1"></i>View My Work</a>
+        <a id="vcardBtn" class="btn btn-outline-light btn-lg shadow" download="Vusi-Jantjies.vcf"><i class="bi bi-person-vcard me-1"></i>Save vCard</a>
+      </div>
     </div>
   </header>
 
   <!-- ABOUT -->
-  <section id="about" class="bg-light">
+  <section id="about" class="bg-light fade-section">
     <div class="container">
       <h2 class="text-center mb-5 fw-bold" data-aos="fade-up"><i class="bi bi-person-lines-fill me-2"></i>About Me</h2>
       <div class="row align-items-center">
         <div class="col-md-6" data-aos="fade-right">
-          <img src="/assets/IMG-20240619-WA0037.jpg" alt="Portrait of Vusi Jantjies" class="profile-img shadow-sm" />
+          <img src="/assets/IMG_20241115_141316_541.jpg" alt="Portrait of Vusi Jantjies" class="profile-img shadow-sm" />
         </div>
         <div class="col-md-6 mt-4 mt-md-0" data-aos="fade-left">
           <p class="lead">I'm a self-taught developer from South Africa passionate about crafting beautiful, functional web applications.</p>
@@ -122,59 +159,80 @@
             <li><i class="bi bi-tools me-2"></i>Skilled in Angular, Bootstrap, JavaScript, Node.js & PostgreSQL.</li>
             <li><i class="bi bi-lightbulb me-2"></i>I bring ideas to life through clean code & responsive designs.</li>
           </ul>
+          <div class="visitor-pill mt-2" title="Visitor counter (local to this device)"><i class="bi bi-people"></i> <span id="visitCount">0</span> visitors</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
+  <!-- PROJECTS (Filterable + Sort + Live Preview modal) -->
+  <section id="projects" class="fade-section">
     <div class="container">
-      <h2 class="text-center fw-bold mb-5" data-aos="fade-up"><i class="bi bi-folder2-open me-2"></i>My Projects</h2>
-      <div class="row g-4">
+      <h2 class="text-center fw-bold mb-3" data-aos="fade-up"><i class="bi bi-folder2-open me-2"></i>My Projects</h2>
 
-        <div class="col-md-4" data-aos="flip-left">
+      <div class="d-flex flex-wrap justify-content-center align-items-center mb-3 gap-2">
+        <div class="filter-btns" role="group" aria-label="Filter projects">
+          <button class="btn btn-outline-secondary active" data-filter="*">All</button>
+          <button class="btn btn-outline-secondary" data-filter="angular">Angular</button>
+          <button class="btn btn-outline-secondary" data-filter="bootstrap">Bootstrap</button>
+          <button class="btn btn-outline-secondary" data-filter="node">Node.js</button>
+        </div>
+        <div class="ms-auto"></div>
+        <div>
+          <select id="sortSelect" class="form-select sort-control" aria-label="Sort projects">
+            <option value="date-desc" selected>Newest first</option>
+            <option value="date-asc">Oldest first</option>
+            <option value="name-asc">Name A→Z</option>
+            <option value="name-desc">Name Z→A</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row g-4" id="projectGrid">
+        <!-- Project 1 -->
+        <div class="col-md-4 portfolio-item" data-category="angular" data-name="Claim-Management" data-date="2025-07-24">
           <div class="card h-100 shadow-sm border-0">
-            <img src="/assets/KMRD-Claims-Management-810x477.jpg" class="card-img-top" alt="Claim Management project screenshot">
+            <img src="/assets/KMRD-Claims-Management-810x477.jpg" class="card-img-top" alt="Claim Management project screenshot" />
             <div class="card-body">
               <h5 class="card-title fw-bold"><i class="bi bi-list-check me-2"></i>Claim-Management</h5>
               <p class="card-text">Manage tasks with a sleek Angular UI.</p>
-              <a href="https://github.com/Mavest98/Claim-Management" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a>
+              <div class="d-flex gap-2 flex-wrap">
+                <a href="https://github.com/Mavest98/Claim-Management" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>GitHub</a>
+                <button class="btn btn-outline-success" data-preview="https://aesthetic-mandazi-32e5e4.netlify.app/"><i class="bi bi-play-circle me-1"></i>Preview</button>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="col-md-4" data-aos="flip-up">
+        <!-- Project 2 -->
+        <div class="col-md-4 portfolio-item" data-category="bootstrap" data-name="Online Store" data-date="2024-12-01">
           <div class="card h-100 shadow-sm border-0">
-            <img src="/assets/online-store-small-business-blog.png" class="card-img-top" alt="Online store project screenshot">
+            <img src="/assets/online-store-small-business-blog.png" class="card-img-top" alt="Online store project screenshot" />
             <div class="card-body">
               <h5 class="card-title fw-bold"><i class="bi bi-cart4 me-2"></i>Online Store</h5>
               <p class="card-text">Online store with cart and secure checkout.</p>
-              <a href="https://github.com/Mavest98/food.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a>
+              <a href="https://github.com/Mavest98/food.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>GitHub</a>
             </div>
           </div>
         </div>
-
-        <div class="col-md-4" data-aos="flip-right">
+        <!-- Project 3 -->
+        <div class="col-md-4 portfolio-item" data-category="angular bootstrap" data-name="Portfolio Website" data-date="2025-08-10">
           <div class="card h-100 shadow-sm border-0">
-            <img src="/assets/Professional-portfolio-736x414.webp" class="card-img-top" alt="Portfolio project screenshot">
+            <img src="/assets/Professional-portfolio-736x414.webp" class="card-img-top" alt="Portfolio project screenshot" />
             <div class="card-body">
               <h5 class="card-title fw-bold"><i class="bi bi-window-sidebar me-2"></i>Portfolio Website</h5>
               <p class="card-text">This site, built with Angular & Bootstrap.</p>
-              <a href="https://github.com/Mavest98/Flex-portfolio.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>View on GitHub</a>
+              <a href="https://github.com/Mavest98/Flex-portfolio.git" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary"><i class="bi bi-github me-1"></i>GitHub</a>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
   <!-- CERTIFICATES -->
-  <section id="certificates" class="bg-light">
+  <section id="certificates" class="bg-light fade-section">
     <div class="container">
       <h2 class="text-center fw-bold mb-5" data-aos="fade-up"><i class="bi bi-award-fill me-2"></i>My Certificates</h2>
-
       <div class="row g-4 justify-content-center">
         <div class="col-md-4" data-aos="zoom-in">
           <div class="card h-100 shadow-sm border-0 text-center">
@@ -186,7 +244,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
           <div class="card h-100 shadow-sm border-0 text-center">
             <div class="card-body">
@@ -197,7 +254,6 @@
             </div>
           </div>
         </div>
-
         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
           <div class="card h-100 shadow-sm border-0 text-center">
             <div class="card-body">
@@ -209,56 +265,36 @@
           </div>
         </div>
       </div>
-
       <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="300">
         <a href="/assets/Vusi Jantjies (1).pdf" class="btn btn-warning btn-lg shadow" download><i class="bi bi-file-earmark-person me-1"></i>Download Resume</a>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS (icons + progress bars combined) -->
-  <section id="skills">
+  <!-- SKILLS -->
+  <section id="skills" class="fade-section">
     <div class="container" data-aos="fade-up">
       <h2 class="text-center fw-bold mb-5"><i class="bi bi-lightning-fill me-2"></i>Skills</h2>
-
       <div class="row mb-4 g-4">
-        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up">
-          <i class="bi bi-code-slash display-4"></i>
-          <h5 class="mt-3">HTML</h5>
-        </div>
-        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="80">
-          <i class="bi bi-braces display-4"></i>
-          <h5 class="mt-3">CSS</h5>
-        </div>
-        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="160">
-          <i class="bi bi-filetype-js display-4"></i>
-          <h5 class="mt-3">JavaScript</h5>
-        </div>
-        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="240">
-          <i class="bi bi-bootstrap display-4"></i>
-          <h5 class="mt-3">Bootstrap</h5>
-        </div>
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up"><i class="bi bi-code-slash display-4"></i><h5 class="mt-3">HTML</h5></div>
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="80"><i class="bi bi-braces display-4"></i><h5 class="mt-3">CSS</h5></div>
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="160"><i class="bi bi-filetype-js display-4"></i><h5 class="mt-3">JavaScript</h5></div>
+        <div class="col-md-3 col-sm-6 text-center" data-aos="fade-up" data-aos-delay="240"><i class="bi bi-bootstrap display-4"></i><h5 class="mt-3">Bootstrap</h5></div>
       </div>
-
       <div class="row">
         <div class="col-md-6">
           <h6>HTML</h6>
           <div class="skill-bar mb-3"><div class="skill-fill" data-skill="95%"></div></div>
-
           <h6>CSS</h6>
           <div class="skill-bar mb-3"><div class="skill-fill" data-skill="90%"></div></div>
-
           <h6>JavaScript</h6>
           <div class="skill-bar mb-3"><div class="skill-fill" data-skill="85%"></div></div>
         </div>
-
         <div class="col-md-6">
           <h6>Bootstrap</h6>
           <div class="skill-bar mb-3"><div class="skill-fill" data-skill="88%"></div></div>
-
           <h6>Angular</h6>
           <div class="skill-bar mb-3"><div class="skill-fill" data-skill="80%"></div></div>
-
           <h6>Node.js</h6>
           <div class="skill-bar mb-3"><div class="skill-fill" data-skill="75%"></div></div>
         </div>
@@ -266,24 +302,155 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="bg-light fade-section">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4"><i class="bi bi-chat-quote-fill me-2"></i>Testimonials</h2>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="card border-0 shadow-sm mx-auto" style="max-width:800px">
+              <div class="card-body d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/100?img=12" class="avatar" alt="Client avatar"/>
+                <div>
+                  <p class="mb-1">“Vusi shipped our Angular dashboard faster than expected and with pixel-perfect UI.”</p>
+                  <small class="text-muted">— Lerato M., Product Manager</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card border-0 shadow-sm mx-auto" style="max-width:800px">
+              <div class="card-body d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/100?img=32" class="avatar" alt="Mentor avatar"/>
+                <div>
+                  <p class="mb-1">“Clean code, clear communication, and great initiative. Highly recommended.”</p>
+                  <small class="text-muted">— Sipho K., Tech Lead</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card border-0 shadow-sm mx-auto" style="max-width:800px">
+              <div class="card-body d-flex align-items-center gap-3">
+                <img src="https://i.pravatar.cc/100?img=56" class="avatar" alt="Colleague avatar"/>
+                <div>
+                  <p class="mb-1">“He turned requirements into a delightful user experience. 10/10.”</p>
+                  <small class="text-muted">— Naledi S., UX Designer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE RESUME / TIMELINE -->
+  <section id="resume" class="fade-section">
+    <div class="container">
+      <h2 class="fw-bold mb-4 text-center"><i class="bi bi-clock-history me-2"></i>Career Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h5 class="mb-1">Full-Stack Developer (Freelance)</h5>
+          <small class="text-muted">2024 – Present</small>
+          <p class="mb-0">Building Angular apps, Bootstrap UIs, and Node.js APIs for small businesses.</p>
+        </div>
+        <div class="timeline-item">
+          <h5 class="mb-1">FNB App Academy — Full Stack Cert</h5>
+          <small class="text-muted">2025</small>
+          <p class="mb-0">Focus: Modern frontends, REST APIs, teamwork, and deployments.</p>
+        </div>
+        <div class="timeline-item">
+          <h5 class="mb-1">IBM Courses — Data Viz & Analysis</h5>
+          <small class="text-muted">2024 – 2025</small>
+          <p class="mb-0">Python, charts, insights, and transforming data for decision-making.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG / INSIGHTS -->
+  <section id="blog" class="bg-light fade-section">
+    <div class="container">
+      <h2 class="fw-bold mb-4 text-center"><i class="bi bi-journal-text me-2"></i>Blog & Insights</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="card-title">How I built Claim-Management in Angular</h5>
+              <p class="card-text">A quick breakdown of architecture decisions, components, and state management.</p>
+              <a href="#" class="stretched-link" onclick="alert('Coming soon: full article!')">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="card-title">Bootstrap tips for fast, clean UIs</h5>
+              <p class="card-text">Utility classes, grid tricks, and patterns I use to speed up delivery.</p>
+              <a href="#" class="stretched-link" onclick="alert('Coming soon: full article!')">Read more</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm border-0">
+            <div class="card-body">
+              <h5 class="card-title">From idea to deploy: my workflow</h5>
+              <p class="card-text">Branching strategy, code reviews, CI/CD, and Netlify basics.</p>
+              <a href="#" class="stretched-link" onclick="alert('Coming soon: full article!')">Read more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Playground (StackBlitz embed placeholder) -->
+      <div class="mt-5">
+        <h3 class="fw-bold mb-3"><i class="bi bi-terminal me-2"></i>Live Code Playground</h3>
+        <p class="text-muted">Try a small JS/HTML demo right here:</p>
+        <iframe class="playground-iframe" src="https://stackblitz.com/edit/web-platform-2v8m9f?embed=1&hideExplorer=1&hideNavigation=1&ctl=1"></iframe>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
-  <section id="contact" class="container">
+  <section id="contact" class="container fade-section">
     <h2 class="fw-bold mb-4">Contact Me</h2>
-    <form action="https://formspree.io/f/meozpbje" method="POST" class="contact-form p-4 rounded-3 shadow-sm bg-light" data-aos="fade-up">
+    <form id="contactForm" action="https://formspree.io/f/meozpbje" method="POST" class="contact-form p-4 rounded-3 shadow-sm bg-light needs-validation" data-aos="fade-up" novalidate>
       <div class="mb-3">
         <label for="name" class="form-label">Your Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required />
+        <div class="invalid-feedback">Please provide your name.</div>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Your Email</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+        <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required />
+        <div class="invalid-feedback">Enter a valid email address.</div>
       </div>
       <div class="mb-3">
         <label for="message" class="form-label">Your Message</label>
         <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your message here..." required></textarea>
+        <div class="invalid-feedback">Please add a message.</div>
+      </div>
+      <!-- Simple anti-spam checkbox (placeholder for reCAPTCHA) -->
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" value="1" id="humanCheck" required />
+        <label class="form-check-label" for="humanCheck">I'm not a robot</label>
+        <div class="invalid-feedback">Please confirm you're human.</div>
       </div>
       <button type="submit" class="btn btn-primary w-100"><i class="bi bi-send-check-fill me-2"></i>Send Message</button>
     </form>
+    <!-- Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index:1100">
+      <div id="submitToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body"><i class="bi bi-check-circle me-2"></i>Message sent! I'll get back to you soon.</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -291,11 +458,10 @@
     <div class="container">
       <p class="mb-1">&copy; 2025 Vusi Jantjies. All rights reserved.</p>
       <small class="text-muted">Built with Angular + Bootstrap</small>
-
       <div class="socials mt-3">
         <a href="https://github.com/Mavest98" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github fs-5"></i></a>
         <a href="https://www.linkedin.com/in/vusi-jantjies-a42166185/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
-        <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#sent?compose=new" aria-label="Email"><i class="bi bi-envelope fs-5"></i></a>
+        <a href="mailto:vusi98jantjies@gmail.com" aria-label="Email"><i class="bi bi-envelope fs-5"></i></a>
       </div>
     </div>
   </footer>
@@ -303,81 +469,258 @@
   <!-- Back to top button -->
   <button id="backToTop" class="btn btn-primary" aria-label="Back to top"><i class="bi bi-arrow-up"></i></button>
 
+  <!-- Preview Modal -->
+  <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="bi bi-box-arrow-up-right me-2"></i>Live Demo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div class="ratio ratio-16x9">
+            <iframe id="previewFrame" src="about:blank" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chatbot -->
+  <button class="btn btn-primary chatbot-toggle"><i class="bi bi-robot"></i></button>
+  <div id="chatbot" class="chatbot">
+    <div class="chatbot-header">
+      <strong>Assistant</strong>
+      <button class="btn btn-sm btn-light" id="closeChat" aria-label="Close chat"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div id="chatBody" class="chatbot-body small">
+      <div class="chat-msg">Hi! Ask me about Vusi’s skills, projects, or links.</div>
+    </div>
+    <div class="chatbot-input">
+      <input id="chatInput" type="text" class="form-control" placeholder="Type a question..." />
+      <button id="chatSend" class="btn btn-primary"><i class="bi bi-send"></i></button>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js" defer></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      // AOS
-      if(window.AOS) AOS.init({ duration: 900, once: true });
+  document.addEventListener('DOMContentLoaded', function(){
+    // AOS
+    if(window.AOS) AOS.init({ duration:900, once:true });
 
-      // Clock
-      const clockEl = document.getElementById('clock');
-      function updateClock(){
-        const now = new Date();
-        clockEl.textContent = now.toLocaleTimeString();
-      }
-      updateClock();
-      setInterval(updateClock, 1000);
+    // Clock
+    const clockEl = document.getElementById('clock');
+    function updateClock(){ const now = new Date(); clockEl.textContent = now.toLocaleTimeString(); }
+    updateClock(); setInterval(updateClock, 1000);
 
-      // Theme toggle with persistence
-      const themeToggle = document.getElementById('themeToggle');
-      const prefersDark = localStorage.getItem('dark-mode') === 'true';
-      if(prefersDark) document.body.classList.add('dark-mode');
-      function refreshThemeButton(){
-        themeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '<i class="bi bi-brightness-high"></i>' : '<i class="bi bi-moon-stars"></i>';
-      }
-      refreshThemeButton();
-      themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        localStorage.setItem('dark-mode', document.body.classList.contains('dark-mode'));
-        refreshThemeButton();
-      });
+    // THEME: auto sync with system + manual override
+    const themeToggle = document.getElementById('themeToggle');
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
-      // Back to top & scroll progress
-      const backToTop = document.getElementById('backToTop');
-      function handleScroll(){
-        const top = document.documentElement.scrollTop || document.body.scrollTop;
-        backToTop.style.display = top > 300 ? 'flex' : 'none';
+    const saved = localStorage.getItem('theme'); // 'dark' | 'light' | null
+    function applyTheme(mode){
+      const isDark = mode === 'dark';
+      document.body.classList.toggle('dark-mode', isDark);
+      themeToggle.innerHTML = isDark ? '<i class="bi bi-brightness-high"></i>' : '<i class="bi bi-moon-stars"></i>';
+      // Chatbot theme
+      document.getElementById('chatbot').classList.toggle('dark', isDark);
+    }
+    // initial
+    if(saved){ applyTheme(saved); }
+    else { applyTheme(mediaQuery.matches ? 'dark' : 'light'); }
 
-        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = scrollHeight > 0 ? (top / scrollHeight) * 100 : 0;
-        document.getElementById('scrollProgress').style.width = scrolled + '%';
-      }
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    // respond to system changes unless user manually overrides
+    mediaQuery.addEventListener('change', e => { if(!localStorage.getItem('theme')) applyTheme(e.matches ? 'dark':'light'); });
 
-      // IntersectionObserver for fade-in sections
-      const sections = document.querySelectorAll('.fade-section');
-      const observer = new IntersectionObserver((entries) =>{
-        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('fade-in'); });
-      }, { threshold: 0.18 });
-      sections.forEach(s => observer.observe(s));
-
-      // Skills animation when visible
-      const skillsSection = document.getElementById('skills');
-      if(skillsSection){
-        const skillObserver = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if(entry.isIntersecting){
-              const bars = skillsSection.querySelectorAll('.skill-fill');
-              bars.forEach(bar => bar.style.width = bar.getAttribute('data-skill'));
-              obs.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.25 });
-        skillObserver.observe(skillsSection);
-      }
-
+    themeToggle.addEventListener('click', () => {
+      const next = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
     });
-  </script>
 
+    // Back to top & scroll progress
+    const backToTop = document.getElementById('backToTop');
+    function handleScroll(){
+      const top = document.documentElement.scrollTop || document.body.scrollTop;
+      backToTop.style.display = top > 300 ? 'flex' : 'none';
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = scrollHeight > 0 ? (top / scrollHeight) * 100 : 0;
+      document.getElementById('scrollProgress').style.width = scrolled + '%';
+    }
+    window.addEventListener('scroll', handleScroll, { passive:true });
+    backToTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+    // Fade-in observer
+    const sections = document.querySelectorAll('.fade-section');
+    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('fade-in'); }); }, { threshold:0.18 });
+    sections.forEach(s => observer.observe(s));
+
+    // Skills animation when visible
+    const skillsSection = document.getElementById('skills');
+    if(skillsSection){
+      const skillObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            const bars = skillsSection.querySelectorAll('.skill-fill');
+            bars.forEach(bar => bar.style.width = bar.getAttribute('data-skill'));
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold:0.25 });
+      skillObserver.observe(skillsSection);
+    }
+
+    // Typewriter effect
+    const typeEl = document.getElementById('typewriter');
+    const phrases = [
+      'Full‑stack Web Developer',
+      'Angular & Bootstrap Enthusiast',
+      'Tech Explorer & Problem Solver'
+    ];
+    let pi = 0, ci = 0, deleting = false;
+    function type(){
+      const cur = phrases[pi];
+      typeEl.textContent = cur.slice(0, ci);
+      if(!deleting){
+        if(ci < cur.length){ ci++; }
+        else { deleting = true; setTimeout(type, 1400); return; }
+      } else {
+        if(ci > 0){ ci--; }
+        else { deleting = false; pi = (pi+1)%phrases.length; }
+      }
+      setTimeout(type, deleting ? 40 : 80);
+    }
+    type();
+
+    // vCard generation
+    const vcardContent = `BEGIN:VCARD\nVERSION:3.0\nFN:Vusi Jantjies\nN:Jantjies;Vusi;;;\nEMAIL;TYPE=INTERNET:vusi98jantjies@gmail.com\nURL:https://github.com/Mavest98\nitem1.URL;TYPE=LinkedIn:https://www.linkedin.com/in/vusi-jantjies-a42166185/\nEND:VCARD`;
+    const vBlob = new Blob([vcardContent], { type: 'text/vcard' });
+    const vUrl = URL.createObjectURL(vBlob);
+    const vBtn = document.getElementById('vcardBtn');
+    vBtn.href = vUrl;
+
+    // Visitor counter (local device)
+    const vc = Number(localStorage.getItem('visit-count')||'0') + 1;
+    localStorage.setItem('visit-count', String(vc));
+    const visitEl = document.getElementById('visitCount');
+    if(visitEl) visitEl.textContent = vc.toLocaleString();
+
+    // Portfolio filter & sort
+    const filterBtns = document.querySelectorAll('.filter-btns .btn');
+    const grid = document.getElementById('projectGrid');
+    const items = Array.from(grid.querySelectorAll('.portfolio-item'));
+
+    function applyFilter(cat){
+      items.forEach(card => {
+        const c = card.getAttribute('data-category')||'';
+        const match = (cat === '*') || c.split(/\s+/).includes(cat);
+        card.classList.toggle('hide', !match);
+      });
+    }
+    filterBtns.forEach(btn => btn.addEventListener('click', e => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      applyFilter(e.currentTarget.getAttribute('data-filter'));
+    }));
+
+    const sortSelect = document.getElementById('sortSelect');
+    function applySort(v){
+      const [key, dir] = v.split('-');
+      const sorted = [...items].sort((a,b)=>{
+        if(key==='name'){
+          return (a.dataset.name.localeCompare(b.dataset.name)) * (dir==='asc'?1:-1);
+        } else { // date
+          return ((new Date(a.dataset.date)) - (new Date(b.dataset.date))) * (dir==='asc'?1:-1);
+        }
+      });
+      // re-append
+      sorted.forEach(el => grid.appendChild(el));
+    }
+    sortSelect.addEventListener('change', e => applySort(e.target.value));
+    applySort(sortSelect.value);
+
+    // Live Preview modal (iframe) with safe fallback
+    const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
+    const frame = document.getElementById('previewFrame');
+    document.querySelectorAll('[data-preview]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const url = btn.getAttribute('data-preview');
+        frame.src = url; // may be blocked by X-Frame-Options depending on site
+        previewModal.show();
+      });
+    });
+    document.getElementById('previewModal').addEventListener('hidden.bs.modal', () => { frame.src = 'about:blank'; });
+
+    // Contact form validation + toast on success
+    const form = document.getElementById('contactForm');
+    const toastEl = document.getElementById('submitToast');
+    const toast = new bootstrap.Toast(toastEl);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      form.classList.add('was-validated');
+      if(!form.checkValidity()) return;
+      try{
+        const fd = new FormData(form);
+        const res = await fetch(form.action, { method:'POST', body:fd, headers: { 'Accept':'application/json' } });
+        if(res.ok){
+          form.reset();
+          form.classList.remove('was-validated');
+          toast.show();
+        } else {
+          alert('There was a problem sending your message. Please try again later.');
+        }
+      } catch(err){
+        alert('Network error. Please try again.');
+      }
+    });
+
+    // Chatbot widget (simple FAQ)
+    const chat = document.getElementById('chatbot');
+    const chatToggle = document.querySelector('.chatbot-toggle');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    const chatBody = document.getElementById('chatBody');
+    const closeChat = document.getElementById('closeChat');
+
+    function openChat(){ chat.style.display='flex'; chatInput.focus(); }
+    function closeChatFn(){ chat.style.display='none'; }
+    chatToggle.addEventListener('click', openChat);
+    closeChat.addEventListener('click', closeChatFn);
+
+    function addMsg(text, who='bot'){
+      const div = document.createElement('div');
+      div.className = 'chat-msg ' + (who==='user'?'user':'');
+      div.textContent = text;
+      chatBody.appendChild(div);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function botReply(q){
+      const s = q.toLowerCase();
+      if(s.includes('skill')) return 'HTML, CSS, JavaScript, Bootstrap, Angular, Node.js, PostgreSQL.';
+      if(s.includes('project')||s.includes('work')) return 'Check the Projects section; my Claim-Management app has a live preview.';
+      if(s.includes('github')) return 'GitHub: github.com/Mavest98';
+      if(s.includes('contact')||s.includes('email')) return 'Use the contact form below or email vusi98jantjies@gmail.com.';
+      if(s.includes('linkedin')) return 'LinkedIn: linkedin.com/in/vusi-jantjies-a42166185/';
+      return "I'm here to help! Ask me about skills, projects, GitHub, or contact details.";
+    }
+
+    function send(){
+      const v = chatInput.value.trim();
+      if(!v) return;
+      addMsg(v, 'user');
+      setTimeout(()=> addMsg(botReply(v), 'bot'), 200);
+      chatInput.value='';
+    }
+    chatSend.addEventListener('click', send);
+    chatInput.addEventListener('keydown', e => { if(e.key==='Enter') send(); });
+  });
+  </script>
 </body>
 </html>
-<!-- End of src/index.html -->
-<!-- This file is the main entry point for the portfolio website, containing HTML structure, styles, and scripts for interactivity. It includes sections for navigation, hero, about, projects, certificates, skills, contact, and footer. The page is designed to be responsive and visually appealing with animations and transitions. -->
-<!-- The code uses Bootstrap for layout and styling, AOS for scroll animations, and custom CSS    for additional effects. It also includes a dark mode toggle, clock display, and back-to-top functionality. The portfolio showcases projects and certificates with links to GitHub and downloadable content. -->
-<!-- The JavaScript handles dynamic features like the clock, theme toggle, scroll progress bar, and fade-in effects for sections. It uses IntersectionObserver for performance-efficient visibility detection. The skills section features animated progress bars that fill when the section comes into view. -->
-<!-- The contact form uses Formspree for handling submissions. The footer includes social media links and   a copyright notice. -->
-<!-- The page is structured to be SEO-friendly with appropriate headings and alt text for images. -->
+<!DOCTYPE html>
+<html lang="en">
